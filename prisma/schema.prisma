@@ -20,5 +20,18 @@ model User {
   bio        String
   github_id  Int
 
+  messages Message[]
   @@map("users")
+}
+
+model Message {
+  id         String   @id @default(uuid())
+  text       String
+  created_at DateTime @default(now())
+
+  user User @relation(fields: [user_id], references: [id])
+
+
+  user_id String
+  @@map("messages")
 }
